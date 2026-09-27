@@ -1,21 +1,23 @@
-const revealItems = document.querySelectorAll(
-    ".product, .featured-content, .craft-details div, .contact"
-);
+const cards = document.querySelectorAll(".bouquet-card");
 
 const observer = new IntersectionObserver(
-    (entries) => {
-        entries.forEach((entry) => {
+    entries => {
+        entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.classList.add("show");
+                entry.target.style.opacity = "1";
+                entry.target.style.transform = "translateY(0)";
             }
         });
     },
     {
-        threshold: 0.15
+        threshold: 0.12
     }
 );
 
-revealItems.forEach((item) => {
-    item.classList.add("reveal");
-    observer.observe(item);
+cards.forEach(card => {
+    card.style.opacity = "0";
+    card.style.transform = "translateY(30px)";
+    card.style.transition = "opacity .7s ease, transform .7s ease";
+
+    observer.observe(card);
 });
